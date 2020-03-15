@@ -33,7 +33,6 @@ function Songs() {
   const [songsList, setSongsList] = useState([]);
   const [allSongs, setAllSongs] = useState([]);
   const [searching, setSearching] = useState(false);
-  const [error, setError] = useState(false);
 
   const retrieveItems = page => {
     setCurrentPage(page);
@@ -49,7 +48,6 @@ function Songs() {
     try {
       setPages(0);
       setSearching(true);
-      setError(false);
       const result = await ItunesService.get(query, "song");
       setAllSongs(result.data.results);
       setSongsList(result.data.results.slice(0, Config.ITEMS_PER_PAGE));
@@ -58,7 +56,6 @@ function Songs() {
     } catch (error) {
       console.log(error);
       setSearching(false);
-      setError(true);
     }
   };
 

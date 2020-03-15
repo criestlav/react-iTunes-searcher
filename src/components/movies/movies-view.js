@@ -33,7 +33,6 @@ function Movies() {
   const [allMovies, setAllMovies] = useState([]);
   const [moviesList, setMoviesList] = useState([]);
   const [searching, setSearching] = useState(false);
-  const [error, setError] = useState(false);
 
   const retrieveItems = page => {
     setCurrentPage(page);
@@ -49,7 +48,6 @@ function Movies() {
       setPages(0);
 
       setSearching(true);
-      setError(false);
       const result = await ItunesService.get(query, "movie");
       setAllMovies(result.data.results);
       setMoviesList(result.data.results.slice(0, Config.ITEMS_PER_PAGE));
@@ -58,7 +56,6 @@ function Movies() {
     } catch (error) {
       console.log(error);
       setSearching(false);
-      setError(true);
     }
   };
 

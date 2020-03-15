@@ -32,7 +32,6 @@ function Albums() {
   const [allAlbums, setAllAlbums] = useState([]);
   const [albumsList, setAlbumsList] = useState([]);
   const [searching, setSearching] = useState(false);
-  const [error, setError] = useState(false);
 
   const retrieveItems = page => {
     setCurrentPage(page);
@@ -48,7 +47,6 @@ function Albums() {
     try {
       setPages(0);
       setSearching(true);
-      setError(false);
       const result = await ItunesService.get(query, "album");
       setAllAlbums(result.data.results);
       setAlbumsList(result.data.results.slice(0, Config.ITEMS_PER_PAGE));
@@ -57,7 +55,6 @@ function Albums() {
     } catch (error) {
       console.log(error);
       setSearching(false);
-      setError(true);
     }
   };
 
